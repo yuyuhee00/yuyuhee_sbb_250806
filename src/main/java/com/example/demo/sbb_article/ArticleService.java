@@ -41,4 +41,8 @@ public class ArticleService {
         return this.articleRepository.findById(id).orElse(null);
     }
 
+    public void delArticle(Article article) {
+        this.articleRepository.delete(article);
+    }
+
 }

@@ -4,12 +4,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{common/layout.html}">
 <head>
-	<title>Question Detail View</title>
+	<title>Article Detail View</title>
 </head>
 <body>
 	<div layout:fragment="content" class="container my-3">
-		<!-- 질 문-->
-		<h2 class="border-bottom py-2" th:text="${article.subject}"></h2>
+
+		<div class="d-flex justify-content-start">
+			<h2 class="border-bottom py-2" th:text="${article.subject}"></h2>
+		</div>
+		<div class="d-flex justify-content-end">
+			<a th:href="@{|/article/delete/${article.id}|}" class="btn btn-primary" >계시물 삭제</a>
+		</div>
+
 		<div class="card my-3">
 			<div class="card-body">
 				<div class="card-text" style="white-space: pre-line;" th:text="${article.content}"></div>
@@ -20,9 +26,9 @@
 				</div>
 			</div>
 		</div>
-		<!-- 답 변 의 갯 수 표 시-->
+
 		<h5 class="border-bottom my-3 py-2" th:text="|${#lists.size(article.answerList)} 개 의 답 변 이 있 습 니 다 .|"></h5>
-		<!-- 답 변 반 복 시 작-->
+
 		<div class="card my-3" th:each="answer : ${article.answerList}">
 			<div class="card-body">
 				<div class="card-text" style="white-space: pre-line;" th:text="${article.content}"></div>
@@ -33,8 +39,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- 답 변 반 복 끝-->
-		<!-- 답 변 작 성-->
+
 		<form th:action="@{|/answer/create/${article.id}|}" th:object="${answerForm}" method="post" class="my-3">
 			<div th:replace="~{common/form_errors.html :: formErrorsFragment}"></div>
 			<textarea th:field="*{content}" rows="10" class="form-control" required></textarea>

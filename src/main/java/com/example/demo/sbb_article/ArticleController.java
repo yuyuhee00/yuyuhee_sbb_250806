@@ -53,4 +53,13 @@ public class ArticleController {
         this.articleService.create(questionForm.getSubject(), questionForm.getContent());
         return "redirect:/article/list";
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable("id") Integer id) {
+        Article article = this.articleService.getArticleById(id);
+        if (article != null) {
+            this.articleService.delArticle(article);
+        }
+        return "redirect:/article/list";
+    }
 }
