@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+			layout:decorate="~{common/layout}">
+<head>
+	<title>Question Form View</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
+		<h5 class="my-3 border-bottom pb-2"> 질 문 등 록 </h5>
+		<form th:action="@{/article/create}" th:object="${articleForm}" method="post">
+			<div th:replace="~{common/form_errors.html :: formErrorsFragment}"></div>
+			<div class="mb-3">
+				<label for="subject" class="form-label"> 제 목 </label>
+				<!-- th:field="*{subject}"
+				1. id="subject"
+				2. name="subject"
+				3. value="${questionForm.subject}"
+				-->
+				<input type="text" th:field="*{subject}" class="form-control" autocomplete="off" required maxlength="200">
+			</div>
+			<div class="mb-3">
+				<label for="content" class="form-label"> 내 용 </label>
+				<textarea th:field="*{content}" class="form-control" rows="10" required maxlength="3000"></textarea>
+			</div>
+			<input type="submit" value=" 저 장 하 기" class="btn btn-primary my-2">
+		</form>
+	</div>
+</body>
+</html>
