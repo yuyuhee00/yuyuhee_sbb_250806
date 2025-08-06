@@ -18,10 +18,18 @@ public class AnswerService {
         answer.setContent(content);
         answer.setCreateDate(LocalDateTime.now());
         answer.setArticle(article);
-        this.answerRepository.save(answer);
+        this.answerRepository.saveAndFlush(answer);
     }
 
-    public List<Answer> getListByQuestion(Article article) {
+    public List<Answer> getListByArticle(Article article) {
         return this.answerRepository.getAnswersByArticle(article);
+    }
+
+    public Answer getAnswerById(Integer id) {
+        return this.answerRepository.getOne(id);
+    }
+
+    public void delete(Integer id) {
+        this.answerRepository.deleteById(id);
     }
 }
